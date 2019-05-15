@@ -5,12 +5,24 @@ import React from "react";
 import Todo from "./Todo";
 
 class TodoList extends React.Component {
-  constructor() {
-    super();
-    this.state = {};
+  constructor(props) {
+    super(props);
+    this.state = {
+      count: this.props.count,
+      notes: this.props.notes
+    };
   }
   render() {
-    return <div>ToDo List</div>;
+    return (
+      <div>
+        There are {this.props.count} notes{" "}
+        {this.props.notes.map(x => (
+          <div>
+            <Todo note={x} />
+          </div>
+        ))}
+      </div>
+    );
   }
 }
 

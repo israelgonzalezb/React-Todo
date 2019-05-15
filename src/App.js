@@ -1,11 +1,12 @@
 import React from "react";
 import TodoList from "./components/TodoComponents/TodoList";
+import TodoForm from "./components/TodoComponents/TodoForm";
 
 const list = [
   {
     task: "Organize Garage",
     id: 1528817077286,
-    completed: false
+    completed: true
   },
   {
     task: "Bake Cookies",
@@ -18,10 +19,52 @@ class App extends React.Component {
   // you will need a place to store your state in this component.
   // design `App` to be the parent component of your application.
   // this component is going to take care of state, and any change handlers you need to work with your state
+  constructor(props) {
+    super(props);
+    this.state = {
+      list: list,
+      task: "",
+      id: null,
+      completed: false
+    };
+  }
+  
+  changeHandler = (e) => {
+    this.setState({task: e.target.value})
+  }
+  
+  addNote = (e) => {
+    e.preventDefault();
+    let newItem = {
+      task: this.state.task,
+      id: Date.now(),
+      completed: false
+    }
+    this.setState({
+      list: [...this.state.list,newItem]
+    });
+    
+  }
+  
+  clearAll = (e) =>{
+    this.setState({
+      list: []
+    })
+  }
+  
+  taskComplete = (e) => {
+    //jjj
+  }
+
+
+  
   render() {
+    console.log(this.state.list);
     return (
       <div>
-        <TodoList />
+        <TodoList count={this.state.list.length} notes={this.state.list} />
+        <TodoForm onSubmit={this.addNote} onChange={this.changeHandler} clear={this.clearAll}/>
+        
       </div>
     );
   }
