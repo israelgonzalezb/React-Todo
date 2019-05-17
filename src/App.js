@@ -2,6 +2,8 @@ import React from "react";
 import TodoList from "./components/TodoComponents/TodoList";
 import TodoForm from "./components/TodoComponents/TodoForm";
 
+import "./components/TodoComponents/Todo.css";
+
 const list = [
   {
     task: "Organize Garage",
@@ -28,6 +30,13 @@ class App extends React.Component {
       completed: false
     };
   }
+  /*
+  handleAllClicks = (e) => {
+    let event = e;
+    let targetId = e.target ? e.target.getAttribute('id') : "unknown";
+    let filteredList = this.state.list.filter(x=>x.id!=targetId);
+    filteredList.length > 0 ? 
+  }*/
   
   changeHandler = (e) => {
     this.setState({task: e.target.value})
@@ -48,21 +57,30 @@ class App extends React.Component {
   
   clearAll = (e) =>{
     this.setState({
-      list: []
+      list: this.state.list.filter(x=>{console.log(x);return x.completed==true})
     })
   }
   
-  taskComplete = (e) => {
-    //jjj
-  }
+  taskCompleted = (id) => {
+    this.setState({
+      list: this.state.list.map((task)=>{
+        if (id === task.id) {
+          return {...task, 
+                  completed: !task.completed
+                 };
+        }
+        return task;
+      })
+      
+  });
+}; 
 
 
   
   render() {
-    console.log(this.state.list);
     return (
       <div>
-        <TodoList count={this.state.list.length} notes={this.state.list} />
+        <TodoList count={this.state.list.length} notes={this.state.list} taskCompleted={this.taskCompleted} />
         <TodoForm onSubmit={this.addNote} onChange={this.changeHandler} clear={this.clearAll}/>
         
       </div>

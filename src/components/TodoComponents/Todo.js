@@ -1,23 +1,22 @@
 import React from "react";
 
-class Todo extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      note: props.note,
-      task: props.note.task,
-      id: props.note.id,
-      completed: props.note.completed
-    };
-  }
-  render() {
+const Todo = (props) => {
+  const note = props.note;
     return (
-      <div style={{textDecoration: this.state.completed && "line-through"}}>
-        <div>Todo #{this.state.id}</div>
-        <div>{this.state.task}</div>
+      <div>
+      <div
+       className={note.completed ? "completed" : ""}
+       onClick={() => props.taskComplete(note.id)}>
+        <div>Todo #{note.id}</div>
+        <div>
+          {note.task+" "} 
+
+        </div>
+        
+      </div>
+                <button type="button">Delete</button>
       </div>
     );
   }
-}
 
 export default Todo;
