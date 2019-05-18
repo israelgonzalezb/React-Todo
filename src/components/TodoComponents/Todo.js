@@ -4,17 +4,21 @@ const Todo = (props) => {
   const note = props.note;
     return (
       <div>
-      <div
-       className={note.completed ? "completed" : ""}
-       onClick={() => props.taskComplete(note.id)}>
-        <div>Todo #{note.id}</div>
-        <div>
+      <div>
+        <label className="panel-block">
+          
+         <input type="checkbox" onClick={() => props.taskComplete(note.id)}/>
+         <span className={note.completed ? "completed" : ""}>
           {note.task+" "} 
+          </span>
+          &ensp;
+          <button className="delete is-small" onClick={() => props.delete(note.id)}></button>
+          
 
-        </div>
+        </label>
         
       </div>
-                <button type="button">Delete</button>
+                
       </div>
     );
   }

@@ -8,7 +8,7 @@ const list = [
   {
     task: "Organize Garage",
     id: 1528817077286,
-    completed: true
+    completed: false
   },
   {
     task: "Bake Cookies",
@@ -52,12 +52,12 @@ class App extends React.Component {
     this.setState({
       list: [...this.state.list,newItem]
     });
-    
+    this.setState({task: ""});
   }
   
   clearAll = (e) =>{
     this.setState({
-      list: this.state.list.filter(x=>{console.log(x);return x.completed==true})
+      list: this.state.list.filter(x=>{console.log(x);return x.completed===false})
     })
   }
   
@@ -75,13 +75,25 @@ class App extends React.Component {
   });
 }; 
 
-
+  deleteTask = (id) => {
+    this.setState({
+      list: this.state.list.filter(x=>{
+        return x.id !== id;
+      })
+      });
+  }
   
   render() {
+    let count = this.state.list.length;
+    let progress = this.state.list.filter(x=>{
+      return x.completed === true;
+    }).length;
     return (
-      <div>
-        <TodoList count={this.state.list.length} notes={this.state.list} taskCompleted={this.taskCompleted} />
-        <TodoForm onSubmit={this.addNote} onChange={this.changeHandler} clear={this.clearAll}/>
+      <div className="panel">
+        <h1 className="title is-1">Reactodo</h1>
+        <progress class="progress is-info" value={(progress/count)*100} max="100"></progress>
+        <TodoList count={this.state.list.length} notes={this.state.list} taskCompleted={this.taskCompleted} delete={this.deleteTask} />
+        <TodoForm onSubmit={this.addNote} onChange={this.changeHandler} clear={this.clearAll} task={this.state.task}/>
         
       </div>
     );

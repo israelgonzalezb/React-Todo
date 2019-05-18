@@ -19,9 +19,9 @@ class TodoList extends React.Component {
   render() {
     return (
       <div>
-        There are {this.props.count} notes
+        {this.props.count!==1 ? "There are " +  this.props.count + " notes" : "There is 1 note"}
         {this.props.notes.map(x => (
-            <Todo note={x} taskComplete={this.state.taskCompleted}/>
+            <Todo note={x} taskComplete={this.state.taskCompleted} delete={this.props.delete}/>
         ))}
       </div>
     );
