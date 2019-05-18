@@ -7,7 +7,7 @@ const Todo = (props) => {
       <div>
         <label className="panel-block">
           
-         <input type="checkbox" onClick={() => props.taskComplete(note.id)}/>
+         <input type="checkbox" checked={note.completed} onClick={() => props.taskComplete(note.id)}/>
          <span className={note.completed ? "completed" : ""}>
           {note.task+" "} 
           </span>
