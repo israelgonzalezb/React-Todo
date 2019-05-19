@@ -19,6 +19,7 @@ class EditTodo extends React.Component {
     let modalClass = this.state.modalClass;
     let toggleModal = this.props.toggleModal;
     let activateModal = this.props.activateModal;
+    let taskDate = new Date(note.id);
 
     return (
       <div className={note.modalActive ? "modal is-active" : "modal"}>
@@ -32,7 +33,11 @@ class EditTodo extends React.Component {
               onClick={()=>activateModal(note.id)}
             />
           </header>
-          <section className="modal-card-body">{note.task}</section>
+          <section className="modal-card-body">
+          <h3 className="title is-3">{note.task}</h3>
+          Created on: {taskDate.toLocaleDateString("default",
+note.id)}
+          </section>
           <footer className="modal-card-foot">
             <button className="button is-success">Save changes</button>
             <button className="button" onClick={() => activateModal(note.id)}>
