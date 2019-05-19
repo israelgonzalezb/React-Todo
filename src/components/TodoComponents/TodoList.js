@@ -37,6 +37,7 @@ class TodoList extends React.Component {
             toggleModal={this.toggleModal} 
             modalClass={this.state.modalClass} 
             activeModalId={this.state.modalId} 
+            activateModal={this.props.activateModal}
             />
         ))}
       </div>

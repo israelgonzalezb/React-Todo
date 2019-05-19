@@ -8,13 +8,14 @@ const Todo = (props) => {
   const deleteNote = props.delete;
   const modalClass = props.modalClass;
   const activeModalId = props.activeModalId;
+  const activateModal = props.activateModal;
   
     return (
       <div>
       <div>
         <label className="panel-block">
 
-           <input type="checkbox" checked={note.completed} onClick={() => taskComplete(note.id)}/>
+          <input type="checkbox" checked={note.completed} onClick={() => taskComplete(note.id)} />
            
            <span className={note.completed ? "completed" : ""}>
               {note.task+" "} 
@@ -28,14 +29,14 @@ const Todo = (props) => {
             </button>
             
             &ensp;
-            <a 
+            <button type="button" 
              className="button is-small" 
-             onClick={() => toggleModal(note.id)}
+             onClick={() => activateModal(note.id)}
              >
               <span className="icon is-small">
                 <i className="fas fa-pencil-alt"></i>
               </span>
-            </a>
+            </button>
             
           </label>
           
@@ -44,6 +45,7 @@ const Todo = (props) => {
         modalClass={modalClass} 
         toggleModal={toggleModal} 
         activeModalId={activeModalId}
+        activateModal={activateModal}
         />
         
       </div>

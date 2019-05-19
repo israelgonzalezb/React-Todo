@@ -70,9 +70,11 @@ class App extends React.Component {
   activateModal = id => {
     this.setState({
       list: this.state.list.map(task => {
+        console.log(task.modalActive);
         if (id === task.id) {
           return { ...task, modalActive: !task.modalActive };
         }
+
         return task;
       })
     });
