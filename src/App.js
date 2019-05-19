@@ -7,12 +7,14 @@ const list = [
   {
     task: "Organize Garage",
     id: 1528817077286,
-    completed: false
+    completed: false,
+    modalActive: false
   },
   {
     task: "Bake Cookies",
     id: 1528817084358,
-    completed: false
+    completed: false,
+    modalActive: false
   }
 ];
 
@@ -23,7 +25,8 @@ class App extends React.Component {
       list: list,
       task: "",
       id: null,
-      completed: false
+      completed: false,
+      modalActive: false
     };
   }
 
@@ -59,7 +62,17 @@ class App extends React.Component {
         if (id === task.id) {
           return { ...task, completed: !task.completed };
         }
-        console.log(this.state.list);
+        return task;
+      })
+    });
+  };
+
+  activateModal = id => {
+    this.setState({
+      list: this.state.list.map(task => {
+        if (id === task.id) {
+          return { ...task, modalActive: !task.modalActive };
+        }
         return task;
       })
     });
@@ -91,6 +104,7 @@ class App extends React.Component {
           notes={this.state.list}
           taskCompleted={this.taskCompleted}
           delete={this.deleteTask}
+          activateModal={this.activateModal}
         />
         <TodoForm
           onSubmit={this.addNote}
